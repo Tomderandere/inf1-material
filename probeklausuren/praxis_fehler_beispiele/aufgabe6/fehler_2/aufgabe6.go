@@ -8,20 +8,25 @@ package aufgabe6
 // Im Ergebnis kommt jedes Element nur einmal vor.
 // Die Elemente stehen im Ergebnis in der Reihenfolge ihres ersten Auftretens.
 func Duplicates(list []int) []int {
-	seen := make(map[int]bool)
 	result := []int{}
-	for _, el := range list {
-		if !seen[el] {
-			seen[el] = true
-			result = append(result, el)
+	for i, el := range list {
+		isdouble := false
+		for _, v := range list[i+1:] {
+			if el == v {
+				isdouble = true
+			}
+		}
+		if isdouble {
+			isresult := false
+			for _, res := range result {
+				if el == res {
+					isresult = true
+				}
+			}
+			if !isresult {
+				result = append(result, el)
+			}
 		}
 	}
 	return result
 }
-
-//slices.Sort(list)
-//for i := 0; i < len(list); i++ {
-//	if list [i] < list [i] {
-//		result = append(result, list[i])
-//	}
-// }
