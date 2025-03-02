@@ -6,35 +6,33 @@ package aufgabe4
 // Falls eine Position nur in einer Liste vorkommt,
 // soll dieses Element ins Ergebnis übernommen werden.
 func ElementProducts(l1, l2 []int) []int {
+	shortest := 0
+	longest := 0
+	l1islongest := false
+
 	result := []int{}
-
-	if len(l1) == 0 {
-		return l2
+	if len(l1) >= len(l2) {
+		shortest = len(l2)
+		longest = len(l1)
+		l1islongest = true
 	}
+	if len(l1) <= len(l2) {
+		shortest = len(l1)
+		longest = len(l2)
 
-	if len(l2) == 0 {
-		return l1
 	}
-
-	for _, el1 := range l1 {
-		if Add(l2, el1) {
-			result = append(result, Add(addRes))
+	for i := 0; i < longest; i++ {
+		if i < shortest {
+			result = append(result, l1[i]*l2[i])
+		}
+		if shortest <= i {
+			if l1islongest {
+				result = append(result, l1[i])
+			} else {
+				result = append(result, l2[i])
+			}
 		}
 	}
 
-	for _, el2 := range l2 {
-		if Add(l1, el2) {
-			result = append(result, Add(addRes))
-		}
-	}
-
-	return []int{}
-}
-
-func Add(l []int, el int) {
-	for _, e := range l {
-		addRes := e * el
-		return addRes
-	}
-	return 0
+	return result
 }

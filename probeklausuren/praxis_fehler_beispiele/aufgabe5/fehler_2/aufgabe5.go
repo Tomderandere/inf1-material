@@ -10,6 +10,7 @@ func IsChain(dominoes []Dominoe) bool {
 		if left[i] == right[i] {
 			return true
 		}
+		
 	}
 	return false
 }
